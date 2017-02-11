@@ -2,16 +2,24 @@
 :root {
     font-size: 24px;
 }
+
 body {
     background-color: #4DAA57;
     color: rgb(23, 126, 137);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     min-height: 100vh;
+    overflow-x: hidden;
 }
+
 .container {
     padding: 0 2rem;
+}
+.title__container {
+    background-color: #4DAA57;
+    left: 0;
+    padding: 0 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .title {
@@ -20,11 +28,16 @@ body {
     font-family: 'Pacifico', cursive;
     font-size: 3rem;
     line-height: 1.3em;
+    margin: 0;
     padding: 0 .2rem;
 }
 
 .express-yourself--outer {
-    padding-bottom: 3rem;
+    margin-bottom: 6rem;
+    min-height: 50vh;
+    position: relative;
+    top: 6rem;
+    z-index: -1; /* To make it appear under the title container */
 }
 
 .express-yourself--inner {
@@ -41,12 +54,12 @@ body {
 .express-yourself--inner:empty {
     border: 0;
 }
+
 .express-yourself--inner:empty:before {
     content: 'Type something!';
     display: block;
     font-family: 'Pacifico', cursive;
     font-size: 1.5em;
-    margin-top: -.9em;
 }
 
 .express-yourself--inner:hover {
@@ -59,9 +72,9 @@ body {
     flex-direction: row;
     /*height: 10rem;*/
     justify-content: flex-start;
-    
     /*transition: font-size .1s ease-in-out;*/
 }
+
 .express-yourself--inner span:last-child:after {
     animation: blink .75s infinite;
     content: '|';
@@ -73,15 +86,17 @@ footer {
     align-self: flex-end;
     /*background-color: rgba(0,0,0,0.5);*/
     font-family: sans-serif;
+    font-size: .8rem;
     padding: 2rem;
     text-align: center;
     width: 100%;
 }
 
 footer a {
+    border-bottom: 3px solid rgb(23, 126, 137);
     border-bottom: 3px solid rgba(23, 126, 137, .3);
-    color: darkslateblue;
     font-family: 'Pacifico', cursive;
+    margin: 0 .3rem;
     text-decoration: none;
 }
 
