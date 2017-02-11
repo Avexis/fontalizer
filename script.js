@@ -1,40 +1,45 @@
-(function(){
+(function() {
     "use strict";
     document.addEventListener('DOMContentLoaded', init);
-    var mainDiv
-    var originalElem
+    var mainDiv;
+    var originalElem;
     var keysPressed;
     var container;
     var lastContainerHeight;
     var intervalTime = 10;
-    
-    function init(){
+
+    function init() {
         document.addEventListener('keydown', onKeyDown);
         document.addEventListener('keyup', onKeyUp);
         mainDiv = document.getElementById('express-yourself');
         originalElem = document.createElement('span');
         keysPressed = [];
-        
+
         container = document.getElementsByClassName('container')[0];
         updateLastContainerHeight();
     }
-    
-    
-    function onKeyDown(event){
-        if(checkBackspace(event)){
+
+
+    function onKeyDown(event) {
+        if (checkBackspace(event)) {
             return;
         }
-        if(!event.key.match(/^[\wæøåÆØÅ!\.\,\d]$/) && event.keyCode !== 13 && event.keyCode !== 32){
+        if (!event.key.match(/^[\wæøåÆØÅ!\.\,\d]$/) && event.keyCode !== 13 && event.keyCode !== 32) {
             return;
         }
-        for(var i = 0; i < keysPressed.length; i++){
-            if(keysPressed[i].key === event.keyCode){
+        for (var i = 0; i < keysPressed.length; i++) {
+            if (keysPressed[i].key === event.keyCode) {
                 return;
             }
         }
-        if(event.keyCode === 13){
+        // Return key
+        if (event.keyCode === 13) {
             mainDiv.appendChild(document.createElement('br'));
             return;
+        }
+        // Prevent space bar from triggering scroll
+        if (event.keyCode === 32) {
+            event.preventDefault();
         }
         var elem = originalElem.cloneNode(true);
         elem.innerHTML = getSign(event);
@@ -45,23 +50,23 @@
         obj.interval = setInterval(increment.bind(obj), intervalTime);
         keysPressed.push(obj);
         mainDiv.appendChild(obj.elem);
-        
+
         if (lastContainerHeight < container.getBoundingClientRect().height) {
             updateLastContainerHeight();
             window.scrollTo(0, container.scrollHeight);
         }
     }
-    
-    function onKeyUp(event){
-        for(var i = 0; i < keysPressed.length; i++){
-            if(keysPressed[i].key === event.keyCode){
+
+    function onKeyUp(event) {
+        for (var i = 0; i < keysPressed.length; i++) {
+            if (keysPressed[i].key === event.keyCode) {
                 clearInterval(keysPressed[i].interval);
-                keysPressed.splice(i,1);
+                keysPressed.splice(i, 1);
             }
         }
     }
-    
-    function increment(){
+
+    function increment() {
         this.time += intervalTime;
         var x = this.time;
         var elem = this.elem;
@@ -83,94 +88,96 @@
                 break;
         }
     }
-    
-    function incrementFontSize(elem){
+
+    function incrementFontSize(elem) {
         var pre = Boolean(elem.style.fontSize) ? elem.style.fontSize : '1';
         pre = pre.replace('rem', '');
         elem.style.fontSize = (0.1 + (+pre)) + 'rem';
     }
-    
-    function incrementFontColor(elem){
+
+    function incrementFontColor(elem) {
         var pre = Boolean(elem.style.color) ? elem.style.color : 'rgb(50, 48, 49)';
-        var blue = pre.split(',')[2].replace(')','').trim();
-        if(blue){
+        var blue = pre.split(',')[2].replace(')', '').trim();
+        if (blue) {
             blue++;
         }
         elem.style.color = 'rgb(50, 48, ' + (blue + 1) + ')';
     }
-    
-    function shake(elem){
+
+    function shake(elem) {
         var transSize = Math.floor(Math.random() * 6) + 1;
         var trans = Boolean(elem.style.transform) ? elem.style.transform : 'translateX(0px)';
-        trans = +trans.replace('translateX(','').replace('px)','');
-        if(trans > 0){
+        trans = +trans.replace('translateX(', '').replace('px)', '');
+        if (trans > 0) {
             trans -= transSize;
-        }else{
+        }
+        else {
             trans += transSize;
         }
         elem.style.transform = 'translateX(' + trans + 'px)';
     }
-    
-    function rotate(elem){
+
+    function rotate(elem) {
         var trans = Boolean(elem.style.transform) && elem.style.transform.indexOf('translate') < 0 ? elem.style.transform : 'rotate(0deg)';
-        trans = +trans.replace('rotate(','').replace('deg)','');
+        trans = +trans.replace('rotate(', '').replace('deg)', '');
         trans += 2;
-        elem.style.transform  = 'rotate(' + trans + 'deg)';
+        elem.style.transform = 'rotate(' + trans + 'deg)';
         console.log(trans);
         console.log(elem.style.transform);
     }
-    
-    function flashyFlashFlash(elem){
+
+    function flashyFlashFlash(elem) {
         elem.style.color = getRandomColor();
-        
+
         function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
     }
-    
-    function breakTheWorld(elem){
-        delete(elem.interval)
+
+    function breakTheWorld(elem) {
+        delete(elem.interval);
         elem.increase = true;
-        var val = setInterval(function(){
-            rotate(elem)
-            flashyFlashFlash(elem)
+        var val = setInterval(function() {
+            rotate(elem);
+            flashyFlashFlash(elem);
             var pre = Boolean(elem.style.fontSize) ? elem.style.fontSize : '1';
-                pre = pre.replace('rem', '');
-                if(pre > 5){
-                    elem.increase = false;
-                }else if(pre < 1){
-                    elem.increase = true;
-                }
-                var inc = elem.increase ? 0.01 : -0.01;
-                elem.style.fontSize = (inc + (+pre)) + 'rem';
-        },30);
-        
-        elem.addEventListener('click',function(){
+            pre = pre.replace('rem', '');
+            if (pre > 5) {
+                elem.increase = false;
+            }
+            else if (pre < 1) {
+                elem.increase = true;
+            }
+            var inc = elem.increase ? 0.01 : -0.01;
+            elem.style.fontSize = (inc + (+pre)) + 'rem';
+        }, 30);
+
+        elem.addEventListener('click', function() {
             clearInterval(val);
-        })
-        
+        });
     }
-    
-    function checkBackspace(event){
-        if(event.keyCode !== 8 || mainDiv.childElementCount === 0){
+
+    function checkBackspace(event) {
+        if (event.keyCode !== 8 || mainDiv.childElementCount === 0) {
             return;
         }
         mainDiv.removeChild(mainDiv.lastElementChild);
     }
-    
-    function getSign(event){
-        if(event.key.match(/^[\wæøåÆØÅ!\.\,\d]$/)){
+
+    function getSign(event) {
+        if (event.key.match(/^[\wæøåÆØÅ!\.\,\d]$/)) {
             return event.key;
-        }else if(event.keyCode === 32){
-            return "&nbsp"
+        }
+        else if (event.keyCode === 32) {
+            return "&nbsp;";
         }
     }
-    
+
     function updateLastContainerHeight() {
         lastContainerHeight = container.getBoundingClientRect().height;
     }
