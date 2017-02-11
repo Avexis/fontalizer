@@ -1,7 +1,11 @@
 (function(){
     "use strict";
     document.addEventListener('DOMContentLoaded', init);
-    var mainDiv, originalElem, keysPressed;
+    var mainDiv
+    var originalElem
+    var keysPressed;
+    var container;
+    var lastContainerHeight;
     var intervalTime = 10;
     
     function init(){
@@ -10,6 +14,9 @@
         mainDiv = document.getElementById('express-yourself');
         originalElem = document.createElement('span');
         keysPressed = [];
+        
+        container = document.getElementsByClassName('container')[0];
+        updateLastContainerHeight();
     }
     
     
@@ -38,6 +45,11 @@
         obj.interval = setInterval(increment.bind(obj), intervalTime);
         keysPressed.push(obj);
         mainDiv.appendChild(obj.elem);
+        
+        if (lastContainerHeight < container.getBoundingClientRect().height) {
+            updateLastContainerHeight();
+            window.scrollTo(0, container.scrollHeight);
+        }
     }
     
     function onKeyUp(event){
@@ -57,14 +69,17 @@
             case (x < 1000):
                 incrementFontSize(elem);
                 break;
-            case (x > 1000 && x < 2000):
+            case (x >= 1000 && x < 2000):
                 incrementFontColor(elem);
                 break;
-            case (x > 2000 && x < 5000):
+            case (x >= 2000 && x < 5000):
                 shake(elem);
                 break;
-            case (x > 5000 && x < 10000):
+            case (x >= 5000 && x < 10000):
                 rotate(elem);
+                break;
+            default:
+                breakTheWorld(elem);
                 break;
         }
     }
@@ -105,6 +120,42 @@
         console.log(elem.style.transform);
     }
     
+    function flashyFlashFlash(elem){
+        elem.style.color = getRandomColor();
+        
+        function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+        }
+    }
+    
+    function breakTheWorld(elem){
+        delete(elem.interval)
+        elem.increase = true;
+        var val = setInterval(function(){
+            rotate(elem)
+            flashyFlashFlash(elem)
+            var pre = Boolean(elem.style.fontSize) ? elem.style.fontSize : '1';
+                pre = pre.replace('rem', '');
+                if(pre > 5){
+                    elem.increase = false;
+                }else if(pre < 1){
+                    elem.increase = true;
+                }
+                var inc = elem.increase ? 0.01 : -0.01;
+                elem.style.fontSize = (inc + (+pre)) + 'rem';
+        },30);
+        
+        elem.addEventListener('click',function(){
+            clearInterval(val);
+        })
+        
+    }
+    
     function checkBackspace(event){
         if(event.keyCode !== 8 || mainDiv.childElementCount === 0){
             return;
@@ -118,5 +169,9 @@
         }else if(event.keyCode === 32){
             return "&nbsp"
         }
+    }
+    
+    function updateLastContainerHeight() {
+        lastContainerHeight = container.getBoundingClientRect().height;
     }
 })();

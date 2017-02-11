@@ -1,25 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata|PT+Serif+Caption|Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 :root {
     font-size: 24px;
 }
 body {
-    background-color: #ED6A5A;
+    background-color: #4DAA57;
+    color: rgb(23, 126, 137);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 .container {
-    bottom: 0;
-    /*color: rgb(155,193,188);*/
-    /*color: rgb(8, 76, 97);*/
-    color: rgb(23, 126, 137);
-    left: 0;
-    max-width: 100%;
-    padding: 0 10%;
-    position: absolute;
-    right: 0;
-    top: 0;
+    padding: 0 2rem;
 }
 
 .title {
-    border-bottom: 5px solid rgb(23, 126, 137);
+    border-bottom: 5px solid rgb(21, 81, 88);
     display: inline-block;
     font-family: 'Pacifico', cursive;
     font-size: 3rem;
@@ -27,21 +23,16 @@ body {
     padding: 0 .2rem;
 }
 
-/*.express-yourself--outer {*/
-/*    line-height: 2rem;*/
-/*    max-width: 80%;*/
-/*    padding-bottom: .3rem;*/
-/*    transform: translateY(-50%);*/
-/*    transition: .15s border-color ease-in-out;*/
-/*}*/
+.express-yourself--outer {
+    padding-bottom: 3rem;
+}
 
 .express-yourself--inner {
     border-bottom: 5px solid rgb(8, 76, 97);
     border-bottom: 5px solid rgba(8, 76, 97, .5);
     color: #323031;
     display: inline;
-    font-family: 'PT Serif Caption', serif;
-    /*font-family: 'Inconsolata', monospace;*/
+    font-family: 'Pacifico', cursive;
     max-width: 80%;
     word-break: break-all;
     word-wrap: break-word;
@@ -54,6 +45,8 @@ body {
     content: 'Type something!';
     display: block;
     font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+    margin-top: -.9em;
 }
 
 .express-yourself--inner:hover {
@@ -64,7 +57,7 @@ body {
 .express-yourself--inner span {
     display: inline-flex;
     flex-direction: row;
-    height: 10rem;
+    /*height: 10rem;*/
     justify-content: flex-start;
     
     /*transition: font-size .1s ease-in-out;*/
@@ -74,6 +67,22 @@ body {
     content: '|';
     display: inline;
     margin-top: -.05em;
+}
+
+footer {
+    align-self: flex-end;
+    /*background-color: rgba(0,0,0,0.5);*/
+    font-family: sans-serif;
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+footer a {
+    border-bottom: 3px solid rgba(23, 126, 137, .3);
+    color: darkslateblue;
+    font-family: 'Pacifico', cursive;
+    text-decoration: none;
 }
 
 @keyframes blink {
