@@ -13,6 +13,7 @@ body {
 .container {
     padding: 0 2rem;
 }
+
 .title__container {
     background-color: #4DAA57;
     left: 0;
@@ -37,7 +38,18 @@ body {
     min-height: 50vh;
     position: relative;
     top: 6rem;
-    z-index: -1; /* To make it appear under the title container */
+    z-index: -1;
+    /* To make it appear under the title container */
+}
+
+.mobile-message {
+    color: #323031;
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-message {
+        display: none;
+    }
 }
 
 .express-yourself--inner {
@@ -60,6 +72,12 @@ body {
     display: block;
     font-family: 'Pacifico', cursive;
     font-size: 1.5em;
+}
+
+@media screen and (max-width: 1024px) {
+    .express-yourself--inner:empty:before {
+        display: none;
+    }
 }
 
 .express-yourself--inner:hover {
