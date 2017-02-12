@@ -142,6 +142,9 @@
     }
 
     function breakTheWorld(elem) {
+        if(elem.broken){
+            return;
+        }
         delete(elem.interval);
         elem.increase = true;
         var val = setInterval(function() {
@@ -155,7 +158,7 @@
             else if (pre < 1) {
                 elem.increase = true;
             }
-            var inc = elem.increase ? 0.01 : -0.01;
+            var inc = elem.increase ? 0.5 : -0.5;
             elem.style.fontSize = (inc + (+pre)) + 'rem';
         }, 30);
 
@@ -163,6 +166,7 @@
             clearInterval(val);
             console.log("The world is no longer broken");
         });
+        elem.broken = true;
     }
 
     function checkBackspace(event) {
