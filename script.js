@@ -7,6 +7,7 @@
     var container;
     var lastContainerHeight;
     var intervalTime = 10;
+    var reg = /^[\wæøåÆØÅ!\.\,\d\-\_\:\;\<\>\¨\~\^\`\'\*\|\!\"\#\¤\%\&\/\(\)\\\+\?\=]$/;
 
     function init() {
         document.addEventListener('keydown', onKeyDown);
@@ -24,7 +25,7 @@
         if (checkBackspace(event)) {
             return;
         }
-        if (!event.key.match(/^[\wæøåÆØÅ!\.\,\d]$/) && event.keyCode !== 13 && event.keyCode !== 32) {
+        if (!event.key.match(reg) && event.keyCode !== 13 && event.keyCode !== 32) {
             return;
         }
         for (var i = 0; i < keysPressed.length; i++) {
@@ -173,13 +174,13 @@
         if (event.keyCode !== 8 || mainDiv.childElementCount === 0) {
             return;
         }
-        // Stop backspace from moving the client backwards in the browser history.
+        // Stop backspace from moving the client backwards in the browser history.  
         event.preventDefault();
         mainDiv.removeChild(mainDiv.lastElementChild);
     }
 
     function getSign(event) {
-        if (event.key.match(/^[\wæøåÆØÅ!\.\,\d]$/)) {
+        if (event.key.match(reg)) {
             return event.key;
         }
         else if (event.keyCode === 32) {
