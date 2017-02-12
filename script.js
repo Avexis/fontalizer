@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
     document.addEventListener('DOMContentLoaded', init);
     var mainDiv;
@@ -111,8 +111,7 @@
         trans = +trans.replace('translateX(', '').replace('px)', '');
         if (trans > 0) {
             trans -= transSize;
-        }
-        else {
+        } else {
             trans += transSize;
         }
         elem.style.transform = 'translateX(' + trans + 'px)';
@@ -122,7 +121,7 @@
         var trans = Boolean(elem.style.transform) && elem.style.transform.indexOf('translate') < 0 ? elem.style.transform : 'rotate(0deg)';
         trans = +trans.replace('rotate(', '').replace('deg)', '');
         trans += 2;
-        if(trans >= 360){
+        if (trans >= 360) {
             trans = 0;
         }
 
@@ -143,27 +142,26 @@
     }
 
     function breakTheWorld(elem) {
-        if(elem.broken){
+        if (elem.broken) {
             return;
         }
         delete(elem.interval);
         elem.increase = true;
-        var val = setInterval(function() {
+        var val = setInterval(function () {
             rotate(elem);
             flashyFlashFlash(elem);
             var pre = Boolean(elem.style.fontSize) ? elem.style.fontSize : '1';
             pre = pre.replace('rem', '');
             if (pre > 5) {
                 elem.increase = false;
-            }
-            else if (pre < 1) {
+            } else if (pre < 1) {
                 elem.increase = true;
             }
             var inc = elem.increase ? 0.5 : -0.5;
             elem.style.fontSize = (inc + (+pre)) + 'rem';
         }, 30);
 
-        elem.addEventListener('click', function() {
+        elem.addEventListener('click', function () {
             clearInterval(val);
             console.log("The world is no longer broken");
         });
@@ -182,8 +180,7 @@
     function getSign(event) {
         if (event.key.match(reg)) {
             return event.key;
-        }
-        else if (event.keyCode === 32) {
+        } else if (event.keyCode === 32) {
             return "&nbsp;";
         }
     }
