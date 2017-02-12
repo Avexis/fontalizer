@@ -173,6 +173,8 @@
         if (event.keyCode !== 8 || mainDiv.childElementCount === 0) {
             return;
         }
+        // Stop backspace from moving the client backwards in the browser history.
+        event.preventDefault();
         mainDiv.removeChild(mainDiv.lastElementChild);
     }
 
