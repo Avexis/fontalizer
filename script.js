@@ -22,7 +22,7 @@
 
 
     function onKeyDown(event) {
-        if (checkBackspace(event)) {
+        if (handleBackspace(event)) {
             return;
         }
         if (!event.key.match(reg) && event.keyCode !== 13 && event.keyCode !== 32) {
@@ -168,7 +168,7 @@
         elem.broken = true;
     }
 
-    function checkBackspace(event) {
+    function handleBackspace(event) {
         if (event.keyCode !== 8 || mainDiv.childElementCount === 0) {
             return;
         }
