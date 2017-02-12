@@ -121,9 +121,11 @@
         var trans = Boolean(elem.style.transform) && elem.style.transform.indexOf('translate') < 0 ? elem.style.transform : 'rotate(0deg)';
         trans = +trans.replace('rotate(', '').replace('deg)', '');
         trans += 2;
+        if(trans >= 360){
+            trans = 0;
+        }
+
         elem.style.transform = 'rotate(' + trans + 'deg)';
-        console.log(trans);
-        console.log(elem.style.transform);
     }
 
     function flashyFlashFlash(elem) {
@@ -159,6 +161,7 @@
 
         elem.addEventListener('click', function() {
             clearInterval(val);
+            console.log("The world is no longer broken");
         });
     }
 
