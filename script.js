@@ -42,7 +42,7 @@
         if (event.keyCode === 32) {
             event.preventDefault();
         }
-        var keySpan = new keySpan(event.keyCode, intervalTime);
+        var keySpan = new KeySpan(event.keyCode, intervalTime);
         keySpan.elem.innerHTML = getSign(event);
         keySpan.startLoop();
         mainDiv.appendChild(keySpan.elem);
@@ -57,7 +57,7 @@
     function onKeyUp(event) {
         for (var i = 0; i < keysPressed.length; i++) {
             if (keysPressed[i].key === event.keyCode) {
-                keysPressed[i].clearInterval();
+                keysPressed[i].stopLoop();
                 keysPressed.splice(i, 1);
             }
         }

@@ -1,0 +1,26 @@
+{
+  "name": "fontalizer",
+  "version": "1.0.0",
+  "description": "Lo and behold! You are now about to witness what soon will be dubbed no less than the text editor of the century. Check out the demo and be amazed. You are very welcome.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avexis/fontalizer.git"
+  },
+  "keywords": [
+    "font",
+    "fun",
+    "reddit",
+    "express",
+    "ballmer"
+  ],
+  "author": "Sindre Bøyum & Alexander Castillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Avexis/fontalizer/issues"
+  },
+  "homepage": "https://github.com/Avexis/fontalizer#readme"
+}

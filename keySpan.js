@@ -1,6 +1,5 @@
 (function () {
-    return KeySpan;
-
+    export function KeySpan = KeySpan;
     function KeySpan(key, intervalTime) {
         this.broken = false;
         this.elem = document.createElement('span');
@@ -19,17 +18,27 @@
             translateX: 0,
             rotate: 0,
         };
+
+        this.stopLoop = stopLoop.bind(this);
+        this.startLoop = startLoop.bind(this);
+        this.step = step.bind(this);
+        this.incrementFontSize = incrementFontSize.bind(this);
+        this.incrementFontColor = incrementFontColor.bind(this);
+        this.shake = shake.bind(this);
+        this.rotate = rotate.bind(this);
+        this.flashyFlashFlash = flashyFlashFlash.bind(this);
+        this.breakTheWorld = breakTheWorld.bind(this);
     }
 
-    KeySpan.prototype.stopLoop = function stopLoop() {
+    function stopLoop() {
         clearInterval(this.interval);
     }
 
-    KeySpan.prototype.startLoop = function startLoop(){
-        this.interval = setInterval(step, this.intervalTime);
+    function startLoop() {
+        this.interval = setInterval(this.step, this.intervalTime);
     }
 
-    KeySpan.prototype.step = function step() {
+    function step() {
         this.time += this.intervalTime;
         var x = this.time;
         switch (true) {
@@ -51,57 +60,58 @@
         }
     }
 
-    KeySpan.prototype.incrementFontSize = function incrementFontSize() {
-        this.fontSize += 0.1;
-        this.elem.style.fontSize = fontSize + 'rem';
+    function incrementFontSize() {
+        this.properties.fontSize += 0.1;
+        this.elem.style.fontSize = this.properties.fontSize + 'rem';
     }
 
-    KeySpan.prototype.incrementFontColorstep = function incrementFontColor() {
+    function incrementFontColor() {
         this.properties.color.blue++;
         this.elem.style.color = 'rgb(' + this.properties.color.red + ', ' + this.properties.color.green + ', ' + this.properties.color.blue + ')';
     }
 
-    KeySpan.prototype.shake = function shake() {
+    function shake() {
         var transSize = Math.floor(Math.random() * 6) + 1;
         if (this.properties.translateX > 0) {
             this.properties.translateX -= transSize;
         } else {
             this.properties.translateX += transSize;
         }
-        setTransformStyle();
+        setTransformStyle.call(this);
     }
 
-    KeySpan.prototype.rotate = function rotate() {
+    function rotate() {
         this.properties.rotate += 2;
         if (this.properties.rotate >= 360) {
             this.properties.rotate = 0;
         }
-        setTransformStyle();
+        setTransformStyle.call(this);
     }
 
-    KeySpan.prototype.flashyFlashFlash = function flashyFlashFlash() {
+    function flashyFlashFlash() {
         this.elem.style.color = getRandomColor();
     }
 
-    KeySpan.prototype.breakTheWorld = function breakTheWorld() {
+    function breakTheWorld() {
         if (this.broken) {
             return;
         }
+        var vs = this;
         this.broken = true;
-        this.clearInterval();
+        this.stopLoop();
         var val = setInterval(initBrokenWorld, 30);
 
-        function initBrokenWorld(){
-            this.rotate();
-            this.flashyFlashFlash();
-            if (this.properties.fontSize > 10) {
-                this.brokenIncrease = false;
-            } else if (this.properties.fontSize < 1) {
-                this.brokenIncrease = true;
+        function initBrokenWorld() {
+            rotate.call(vs);
+            flashyFlashFlash.call(vs);
+            if (vs.properties.fontSize > 10) {
+                vs.brokenIncrease = false;
+            } else if (vs.properties.fontSize < 1) {
+                vs.brokenIncrease = true;
             }
-            var inc = this.elem.brokenIncrease ? 0.5 : -0.5;
-            this.properties.fontSize += inc;
-            this.elem.style.fontSize = this.properties.fontSize + 'rem';
+            var inc = vs.brokenIncrease ? 0.5 : -0.5;
+            vs.properties.fontSize += inc;
+            vs.elem.style.fontSize = vs.properties.fontSize + 'rem';
         }
 
         this.elem.addEventListener('click', function () {
