@@ -2,6 +2,7 @@
   "name": "fontalizer",
   "version": "1.0.0",
   "description": "Lo and behold! You are now about to witness what soon will be dubbed no less than the text editor of the century. Check out the demo and be amazed. You are very welcome.",
+
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/Avexis/fontalizer/issues"
   },
-  "homepage": "https://github.com/Avexis/fontalizer#readme"
+  "homepage": "https://github.com/Avexis/fontalizer#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^2.2.1"
+  }
 }
