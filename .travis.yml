@@ -1,5 +1,6 @@
-language: javascript
+language: node_js
+node_js:
+  - "6.9.1"
 
-$ npm install
-
-$ webpack
+install:
+  - npm i -g yarn && yarn
