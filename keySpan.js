@@ -1,6 +1,6 @@
 (function () {
-    export function KeySpan = KeySpan;
-    function KeySpan(key, intervalTime) {
+    export class KeySpan {
+        constructor(key, intervalTime){
         this.broken = false;
         this.elem = document.createElement('span');
         this.key = key;
@@ -28,6 +28,7 @@
         this.rotate = rotate.bind(this);
         this.flashyFlashFlash = flashyFlashFlash.bind(this);
         this.breakTheWorld = breakTheWorld.bind(this);
+        }
     }
 
     function stopLoop() {
@@ -134,4 +135,4 @@
     function setTransformStyle() {
         this.elem.style.transform = 'translateX(' + this.properties.translateX + 'px) rotate(' + this.properties.rotate + "deg)";
     }
-})
+})();
