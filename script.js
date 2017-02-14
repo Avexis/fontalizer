@@ -1,6 +1,9 @@
+import {
+    KeySpan
+} from "./keySpan.js"
 (function () {
     "use strict";
-    import {KeySpan} from "keyspan.js"
+
     document.addEventListener('DOMContentLoaded', init);
     var mainDiv;
     var originalElem;

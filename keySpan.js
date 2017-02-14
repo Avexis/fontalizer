@@ -1,33 +1,32 @@
-(function () {
     export class KeySpan {
-        constructor(key, intervalTime){
-        this.broken = false;
-        this.elem = document.createElement('span');
-        this.key = key;
-        this.interval;
-        this.intervalTime = intervalTime;
-        this.brokenIncrease = true;
-        this.time = 0;
-        this.properties = {
-            fontSize: 1,
-            color: {
-                red: 50,
-                green: 48,
-                blue: 49
-            },
-            translateX: 0,
-            rotate: 0,
-        };
+        constructor(key, intervalTime) {
+            this.broken = false;
+            this.elem = document.createElement('span');
+            this.key = key;
+            this.interval;
+            this.intervalTime = intervalTime;
+            this.brokenIncrease = true;
+            this.time = 0;
+            this.properties = {
+                fontSize: 1,
+                color: {
+                    red: 50,
+                    green: 48,
+                    blue: 49
+                },
+                translateX: 0,
+                rotate: 0,
+            };
 
-        this.stopLoop = stopLoop.bind(this);
-        this.startLoop = startLoop.bind(this);
-        this.step = step.bind(this);
-        this.incrementFontSize = incrementFontSize.bind(this);
-        this.incrementFontColor = incrementFontColor.bind(this);
-        this.shake = shake.bind(this);
-        this.rotate = rotate.bind(this);
-        this.flashyFlashFlash = flashyFlashFlash.bind(this);
-        this.breakTheWorld = breakTheWorld.bind(this);
+            this.stopLoop = stopLoop.bind(this);
+            this.startLoop = startLoop.bind(this);
+            this.step = step.bind(this);
+            this.incrementFontSize = incrementFontSize.bind(this);
+            this.incrementFontColor = incrementFontColor.bind(this);
+            this.shake = shake.bind(this);
+            this.rotate = rotate.bind(this);
+            this.flashyFlashFlash = flashyFlashFlash.bind(this);
+            this.breakTheWorld = breakTheWorld.bind(this);
         }
     }
 
@@ -135,4 +134,3 @@
     function setTransformStyle() {
         this.elem.style.transform = 'translateX(' + this.properties.translateX + 'px) rotate(' + this.properties.rotate + "deg)";
     }
-})();
